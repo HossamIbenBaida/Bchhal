@@ -1,10 +1,11 @@
 ---
 /**
- * Plays a Darija recording and offers a full-screen "show the seller" mode.
+ * Plays a Darija recording (when FEATURES.audio is on) and offers a full-screen "show the seller" mode.
  * Audio files live in Cloudflare R2 (PUBLIC_AUDIO_BASE) or /public/audio in dev.
  * Only a few lines of vanilla JS, no framework needed.
  */
 import { type Lang, t } from '@/i18n/ui';
+import { FEATURES } from '@/config';
 
 interface Props {
   lang: Lang;
@@ -15,7 +16,7 @@ interface Props {
 }
 const { lang, latin, arabic, file, recorded } = Astro.props;
 const base = import.meta.env.PUBLIC_AUDIO_BASE || '/audio/';
-const src = file && recorded ? `${base.replace(/\/?$/, '/')}${file}` : null;
+const src = FEATURES.audio && file && recorded ? `${base.replace(/\/?$/, '/')}${file}` : null;
 ---
 
 <div class="audio-player flex flex-wrap items-center gap-3">
@@ -28,7 +29,7 @@ const src = file && recorded ? `${base.replace(/\/?$/, '/')}${file}` : null;
         </button>
       </>
     ) : (
-      <p class="text-sm italic text-ink/60">{t(lang, 'darija.audioSoon')}</p>
+      FEATURES.audio && <p class="text-sm italic text-ink/60">{t(lang, 'darija.audioSoon')}</p>
     )
   }
   <button type="button" data-show class="rounded-full border-2 border-terracotta px-5 py-2 font-semibold text-terracotta">

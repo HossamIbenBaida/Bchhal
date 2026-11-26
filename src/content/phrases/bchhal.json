@@ -4,8 +4,8 @@
   "arabic": "بشحال؟",
   "meaning": { "fr": "Combien ?", "en": "How much?" },
   "description": {
-    "fr": "« Bchhal ? » veut dire « combien ? » en darija marocaine. Prononciation, écriture arabe, audio et conseils pour l'utiliser au souk.",
-    "en": "\"Bchhal?\" means \"how much?\" in Moroccan Darija. Pronunciation, Arabic script, audio and tips for using it in the souk."
+    "fr": "« Bchhal ? » veut dire « combien ? » en darija marocaine. Prononciation, écriture arabe, mode « montrer l'écran » et conseils pour l'utiliser au souk.",
+    "en": "\"Bchhal?\" means \"how much?\" in Moroccan Darija. Pronunciation, Arabic script, show-the-screen mode and tips for using it in the souk."
   },
   "situation": "souk",
   "usage": {
@@ -22,8 +22,8 @@
     {
       "q": { "fr": "Comment prononcer « bchhal » ?", "en": "How do you pronounce \"bchhal\"?" },
       "a": {
-        "fr": "En une syllabe rapide : « b-chhal », avec un « ch » français et un « h » soufflé. Écoutez l'audio pour l'intonation.",
-        "en": "As one quick syllable: \"b-shhal\", with an \"sh\" sound and a breathy \"h\". Listen to the audio for the intonation."
+        "fr": "En une syllabe rapide : « b-chhal », avec un « ch » français et un « h » soufflé. En cas de doute, montrez l'écran au vendeur.",
+        "en": "As one quick syllable: \"b-shhal\", with an \"sh\" sound and a breathy \"h\". If in doubt, show the screen to the seller."
       }
     },
     {
