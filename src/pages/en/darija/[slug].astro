@@ -1,0 +1,9 @@
+---
+import PhraseTemplate from '@/components/templates/PhraseTemplate.astro';
+import { phrasePaths } from '@/lib/content';
+
+export const getStaticPaths = () => phrasePaths('en');
+const { entry } = Astro.props;
+---
+
+<PhraseTemplate lang="en" {entry} />

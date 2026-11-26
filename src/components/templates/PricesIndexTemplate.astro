@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { type Lang, t, path } from '@/i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const items = (await getCollection('objets')).sort((a, b) => a.data.name[lang].localeCompare(b.data.name[lang]));
+const title = lang === 'fr' ? 'Juste prix au souk : combien payer au Maroc' : 'Fair prices in the souk: how much to pay in Morocco';
+const description =
+  lang === 'fr'
+    ? 'Fourchettes de prix justes pour les achats au souk au Maroc : tapis, babouches, lanternes, cuir, épices et taxis.'
+    : 'Fair price ranges for souk shopping in Morocco: rugs, babouches, lanterns, leather, spices and taxis.';
+---
+
+<BaseLayout
+  {lang} {title} {description}
+  alternates={{ fr: path('fr', 'prices'), en: path('en', 'prices') }}
+  breadcrumbs={[{ name: t(lang, 'nav.home'), href: path(lang) }, { name: t(lang, 'nav.prices'), href: path(lang, 'prices') }]}
+>
+  <h1 class="text-3xl font-bold">{title}</h1>
+  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+    {
+      items.map((o) => (
+        <li>
+          <a href={path(lang, 'prices', o.data.slug[lang])} class="block rounded-xl bg-white p-4 shadow-sm hover:shadow-md">
+            <span class="font-bold">{o.data.name[lang]}</span>
+            <span class="block text-sm text-ink/70">{o.data.description[lang]}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

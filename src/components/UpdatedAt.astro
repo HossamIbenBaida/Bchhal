@@ -1,0 +1,11 @@
+---
+import { type Lang, t, formatDate } from '@/i18n/ui';
+
+interface Props { lang: Lang; date: Date }
+const { lang, date } = Astro.props;
+const iso = date.toISOString().slice(0, 10);
+---
+
+<p class="text-sm text-ink/60">
+  {t(lang, 'common.updated')} <time datetime={iso}>{formatDate(lang, iso)}</time>
+</p>

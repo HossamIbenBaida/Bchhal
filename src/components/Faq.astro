@@ -1,0 +1,21 @@
+---
+import { type Lang, t } from '@/i18n/ui';
+import type { Faq } from '@/lib/seo';
+
+interface Props { lang: Lang; faq: Faq }
+const { lang, faq } = Astro.props;
+---
+
+{
+  faq.length > 0 && (
+    <section class="mt-8">
+      <h2 class="text-xl font-bold mb-3">{t(lang, 'common.faq')}</h2>
+      {faq.map((f) => (
+        <details class="mb-2 rounded-lg bg-white p-3 shadow-sm">
+          <summary class="cursor-pointer font-medium">{f.q[lang]}</summary>
+          <p class="mt-2">{f.a[lang]}</p>
+        </details>
+      ))}
+    </section>
+  )
+}

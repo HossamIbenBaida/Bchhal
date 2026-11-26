@@ -1,0 +1,20 @@
+# Cloudflare Pages configuration.
+# The Git integration (Pages connected to GitHub) builds with:
+#   Build command: npm run build   |   Output directory: dist
+name = "bchhal"
+compatibility_date = "2026-11-01"
+pages_build_output_dir = "./dist"
+
+# Bindings planned for the next steps (uncomment once created with wrangler):
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "bchhal-db"
+# database_id = "<to fill>"
+#
+# [[kv_namespaces]]
+# binding = "MEDIANS"
+# id = "<to fill>"
+#
+# [[r2_buckets]]
+# binding = "AUDIO"
+# bucket_name = "bchhal-audio"

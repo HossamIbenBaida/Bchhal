@@ -1,0 +1,60 @@
+---
+/**
+ * Plays a Darija recording and offers a full-screen "show the seller" mode.
+ * Audio files live in Cloudflare R2 (PUBLIC_AUDIO_BASE) or /public/audio in dev.
+ * Only a few lines of vanilla JS, no framework needed.
+ */
+import { type Lang, t } from '@/i18n/ui';
+
+interface Props {
+  lang: Lang;
+  latin: string;
+  arabic: string;
+  file?: string;
+  recorded: boolean;
+}
+const { lang, latin, arabic, file, recorded } = Astro.props;
+const base = import.meta.env.PUBLIC_AUDIO_BASE || '/audio/';
+const src = file && recorded ? `${base.replace(/\/?$/, '/')}${file}` : null;
+---
+
+<div class="audio-player flex flex-wrap items-center gap-3">
+  {
+    src ? (
+      <>
+        <audio preload="none" src={src} />
+        <button type="button" data-play class="rounded-full bg-mint px-5 py-2 font-semibold text-white">
+          ▶ {t(lang, 'darija.listen')}
+        </button>
+      </>
+    ) : (
+      <p class="text-sm italic text-ink/60">{t(lang, 'darija.audioSoon')}</p>
+    )
+  }
+  <button type="button" data-show class="rounded-full border-2 border-terracotta px-5 py-2 font-semibold text-terracotta">
+    {t(lang, 'darija.show')}
+  </button>
+
+  <dialog data-screen class="m-0 h-full max-h-none w-full max-w-none bg-sand p-6 backdrop:bg-ink/80">
+    <div class="flex h-full flex-col items-center justify-center gap-6 text-center">
+      <p lang="ar" dir="rtl" class="font-arabic text-7xl leading-tight">{arabic}</p>
+      <p class="text-4xl font-bold">{latin}</p>
+      <form method="dialog">
+        <button class="rounded-full bg-ink px-6 py-3 text-sand">{t(lang, 'darija.close')}</button>
+      </form>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.audio-player').forEach((root) => {
+    const audio = root.querySelector('audio');
+    root.querySelector('[data-play]')?.addEventListener('click', () => {
+      if (!audio) return;
+      audio.currentTime = 0;
+      void audio.play();
+    });
+    const dialog = root.querySelector<HTMLDialogElement>('[data-screen]');
+    root.querySelector('[data-show]')?.addEventListener('click', () => dialog?.showModal());
+  });
+</script>

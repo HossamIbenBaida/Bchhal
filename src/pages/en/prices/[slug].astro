@@ -1,0 +1,9 @@
+---
+import ObjetTemplate from '@/components/templates/ObjetTemplate.astro';
+import { objetPaths } from '@/lib/content';
+
+export const getStaticPaths = () => objetPaths('en');
+const { entry } = Astro.props;
+---
+
+<ObjetTemplate lang="en" {entry} />

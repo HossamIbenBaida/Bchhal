@@ -1,0 +1,63 @@
+{
+  "slug": { "fr": "tapis", "en": "rug" },
+  "name": { "fr": "Tapis berbère", "en": "Berber rug" },
+  "description": {
+    "fr": "Combien payer un tapis berbère au souk de Marrakech ? Fourchette de prix par qualité, conseils de négociation et phrase en darija.",
+    "en": "How much should you pay for a Berber rug in the Marrakech souk? Price range by quality, bargaining tips and the Darija phrase to use."
+  },
+  "intro": {
+    "fr": "Le tapis est l'achat le plus cher et le plus négocié du souk. Le prix dépend surtout de la fabrication (main ou machine), de la laine, de la densité des nœuds et de la taille. Comparez plusieurs boutiques avant de vous décider.",
+    "en": "A rug is the most expensive and most bargained-for purchase in the souk. The price depends mainly on how it is made (by hand or machine), the wool, the knot density and the size. Compare several shops before you decide."
+  },
+  "updated": "2026-11-26",
+  "prices": [
+    {
+      "city": "Marrakech",
+      "quality": { "fr": "Machine / synthétique", "en": "Machine-made / synthetic" },
+      "unit": { "fr": "par m²", "en": "per m²" },
+      "min": 300,
+      "max": 600,
+      "verified": false
+    },
+    {
+      "city": "Marrakech",
+      "quality": { "fr": "Fait main, laine", "en": "Handmade, wool" },
+      "unit": { "fr": "par m²", "en": "per m²" },
+      "min": 1000,
+      "max": 2500,
+      "verified": false
+    }
+  ],
+  "tips": [
+    {
+      "fr": "Retournez le tapis : sur un tapis fait main, le motif est aussi net au dos et les nœuds sont légèrement irréguliers.",
+      "en": "Turn the rug over: on a handmade rug the pattern is just as clear on the back and the knots are slightly irregular."
+    },
+    {
+      "fr": "Ne donnez jamais votre prix en premier. Demandez « Bchhal ? » et laissez le vendeur ouvrir.",
+      "en": "Never name your price first. Ask \"Bchhal?\" and let the seller open."
+    },
+    {
+      "fr": "Demandez si l'envoi à l'étranger est inclus, et faites-vous remettre un reçu écrit.",
+      "en": "Ask whether shipping abroad is included, and get a written receipt."
+    }
+  ],
+  "phrases": ["bchhal"],
+  "cities": ["marrakech"],
+  "faq": [
+    {
+      "q": { "fr": "Comment savoir si un tapis est fait main ?", "en": "How can I tell if a rug is handmade?" },
+      "a": {
+        "fr": "Regardez le dos : le motif doit y être visible et les nœuds un peu irréguliers. Les franges d'un tapis fait main prolongent les fils de chaîne au lieu d'être cousues.",
+        "en": "Look at the back: the pattern should be visible and the knots slightly irregular. On a handmade rug the fringes are the ends of the warp threads, not sewn on."
+      }
+    },
+    {
+      "q": { "fr": "Faut-il négocier le prix d'un tapis ?", "en": "Should I bargain over the price of a rug?" },
+      "a": {
+        "fr": "Oui, la négociation est normale et attendue dans le souk. Restez souriant, comparez plusieurs boutiques et n'hésitez pas à partir si le prix ne vous convient pas.",
+        "en": "Yes, bargaining is normal and expected in the souk. Stay friendly, compare several shops and feel free to walk away if the price doesn't suit you."
+      }
+    }
+  ]
+}

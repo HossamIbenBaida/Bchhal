@@ -1,0 +1,38 @@
+{
+  "_note": "DEMO VALUES in MAD per person. Not verified: replace with field surveys before launch.",
+  "verified": false,
+  "eurToMad": 10.8,
+  "eurToMadNote": "Indicative rate, to update from an official source.",
+  "cities": {
+    "marrakech": { "fr": "Marrakech", "en": "Marrakech", "factor": 1.0 },
+    "fes": { "fr": "Fès", "en": "Fez", "factor": 0.9 },
+    "essaouira": { "fr": "Essaouira", "en": "Essaouira", "factor": 0.9 },
+    "chefchaouen": { "fr": "Chefchaouen", "en": "Chefchaouen", "factor": 0.8 }
+  },
+  "styles": {
+    "routard": {
+      "label": { "fr": "Routard", "en": "Backpacker" },
+      "perDay": { "lodging": 200, "food": 150, "localTransport": 50, "tips": 20 }
+    },
+    "confort": {
+      "label": { "fr": "Confort", "en": "Comfort" },
+      "perDay": { "lodging": 700, "food": 350, "localTransport": 120, "tips": 50 }
+    },
+    "luxe": {
+      "label": { "fr": "Luxe", "en": "Luxury" },
+      "perDay": { "lodging": 2500, "food": 800, "localTransport": 400, "tips": 150 }
+    }
+  },
+  "extras": {
+    "hammam": { "fr": "Hammam", "en": "Hammam", "routard": 100, "confort": 400, "luxe": 1000 },
+    "desert": { "fr": "Excursion désert (3 j)", "en": "Desert trip (3 days)", "routard": 1000, "confort": 2500, "luxe": 6000 },
+    "airportTaxi": { "fr": "Taxi aéroport (A/R)", "en": "Airport taxi (return)", "routard": 200, "confort": 300, "luxe": 600 },
+    "souvenirs": { "fr": "Souvenirs", "en": "Souvenirs", "routard": 300, "confort": 1000, "luxe": 3000 }
+  },
+  "categories": {
+    "lodging": { "fr": "Hébergement (riad, auberge)", "en": "Lodging (riad, hostel)" },
+    "food": { "fr": "Repas", "en": "Food" },
+    "localTransport": { "fr": "Petit et grand taxi", "en": "Petit and grand taxi" },
+    "tips": { "fr": "Pourboires", "en": "Tips" }
+  }
+}

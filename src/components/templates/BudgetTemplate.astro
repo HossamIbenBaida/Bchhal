@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BudgetCalculator from '@/components/BudgetCalculator.astro';
+import Faq from '@/components/Faq.astro';
+import UpdatedAt from '@/components/UpdatedAt.astro';
+import { type Lang, t, path } from '@/i18n/ui';
+import { faqLd } from '@/lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const title = lang === 'fr' ? 'Calculateur de budget voyage au Maroc' : 'Morocco travel budget calculator';
+const description =
+  lang === 'fr'
+    ? 'Estimez le budget de votre voyage au Maroc selon la ville, la durée et votre style : riad, repas, taxis, hammam, désert et pourboires.'
+    : 'Estimate your Morocco trip budget by city, length and travel style: riad, food, taxis, hammam, desert and tips.';
+const faq = [
+  {
+    q: { fr: 'Le calculateur inclut-il le vol ?', en: 'Does the calculator include flights?' },
+    a: { fr: 'Non. Il couvre les dépenses sur place au Maroc ; ajoutez le prix de votre vol à part.', en: 'No. It covers spending in Morocco; add your flight price separately.' },
+  },
+  {
+    q: { fr: 'D’où viennent les montants ?', en: 'Where do the amounts come from?' },
+    a: {
+      fr: 'Pour l’instant ce sont des valeurs de démonstration. Elles seront remplacées par des relevés faits sur place et par les prix déclarés par les voyageurs.',
+      en: 'For now they are demo values. They will be replaced by on-the-ground surveys and prices reported by travellers.',
+    },
+  },
+];
+---
+
+<BaseLayout
+  {lang} {title} {description}
+  alternates={{ fr: path('fr', 'budget'), en: path('en', 'budget') }}
+  breadcrumbs={[{ name: t(lang, 'nav.home'), href: path(lang) }, { name: t(lang, 'nav.budget'), href: path(lang, 'budget') }]}
+  jsonLd={[faqLd(faq, lang)]}
+>
+  <h1 class="text-3xl font-bold">{title}</h1>
+  <UpdatedAt {lang} date={new Date('2026-11-26')} />
+  <p class="my-4">{description}</p>
+  <BudgetCalculator {lang} />
+  <Faq {lang} {faq} />
+</BaseLayout>

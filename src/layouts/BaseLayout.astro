@@ -1,0 +1,105 @@
+---
+import '@/styles/global.css';
+import { type Lang, languages, t, path } from '@/i18n/ui';
+import { breadcrumbLd, type Crumb } from '@/lib/seo';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Path of this page in each language, used for hreflang and the language switch. */
+  alternates: Record<Lang, string>;
+  breadcrumbs?: Crumb[];
+  jsonLd?: (object | null)[];
+  noindex?: boolean;
+}
+
+const { lang, title, description, alternates, breadcrumbs = [], jsonLd = [], noindex = false } =
+  Astro.props;
+const site = Astro.site!;
+const canonical = new URL(alternates[lang], site).href;
+const schemas = [...jsonLd, breadcrumbs.length > 1 ? breadcrumbLd(breadcrumbs, site) : null].filter(
+  Boolean,
+);
+const fullTitle = `${title} | ${t(lang, 'site.name')}`;
+const nav = [
+  { href: path(lang, 'prices'), label: t(lang, 'nav.prices') },
+  { href: path(lang, 'darija'), label: t(lang, 'nav.darija') },
+  { href: path(lang, 'budget'), label: t(lang, 'nav.budget') },
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {
+      (Object.keys(alternates) as Lang[]).map((l) => (
+        <link rel="alternate" hreflang={l} href={new URL(alternates[l], site).href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(alternates.fr, site).href} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+    <meta name="theme-color" content="#b4472b" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body class="min-h-screen font-sans antialiased flex flex-col">
+    <header class="bg-terracotta text-sand">
+      <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between gap-4">
+        <a href={path(lang)} class="text-xl font-bold">{t(lang, 'site.name')}</a>
+        <nav class="flex gap-4 text-sm font-medium">
+          {nav.map((n) => <a href={n.href} class="hover:underline">{n.label}</a>)}
+          {
+            (Object.keys(languages) as Lang[])
+              .filter((l) => l !== lang)
+              .map((l) => (
+                <a href={alternates[l]} hreflang={l} lang={l} class="uppercase opacity-90 hover:underline">
+                  {l}
+                </a>
+              ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-3xl px-4 py-6 flex-1">
+      {
+        breadcrumbs.length > 1 && (
+          <nav aria-label="breadcrumb" class="mb-4 text-sm text-ink/70">
+            <ol class="flex flex-wrap gap-1">
+              {breadcrumbs.map((c, i) => (
+                <li>
+                  {i > 0 && <span aria-hidden="true">›</span>}
+                  {i < breadcrumbs.length - 1 ? (
+                    <a href={c.href} class="underline">{c.name}</a>
+                  ) : (
+                    <span aria-current="page">{c.name}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      <slot />
+    </main>
+
+    <footer class="border-t border-ink/10 text-sm text-ink/70">
+      <div class="mx-auto max-w-3xl px-4 py-4">
+        <p>{t(lang, 'site.tagline')}</p>
+        <p>{t(lang, 'footer.legal')}</p>
+      </div>
+    </footer>
+  </body>
+</html>
