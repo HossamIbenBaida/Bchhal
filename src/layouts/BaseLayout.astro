@@ -49,22 +49,25 @@ const nav = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
-    <meta name="theme-color" content="#b4472b" />
+    <meta name="theme-color" content="#0d5b4d" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body class="min-h-screen font-sans antialiased flex flex-col">
-    <header class="bg-terracotta text-sand">
-      <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between gap-4">
-        <a href={path(lang)} class="text-xl font-bold">{t(lang, 'site.name')}</a>
-        <nav class="flex gap-4 text-sm font-medium">
-          {nav.map((n) => <a href={n.href} class="hover:underline">{n.label}</a>)}
+    <header class="border-b border-hairline bg-plaster">
+      <div class="mx-auto max-w-3xl px-4 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <a href={path(lang)} class="flex items-center gap-2 text-2xl no-underline" aria-label={t(lang, 'site.name')}>
+          <img src="/favicon.svg" alt="" width="28" height="28" />
+          <span class="bc-wordmark">Bchhal<i> ?</i></span>
+        </a>
+        <nav class="flex flex-wrap gap-4 text-sm font-medium">
+          {nav.map((n) => <a href={n.href} class="hover:text-zellige hover:underline">{n.label}</a>)}
           {
             (Object.keys(languages) as Lang[])
               .filter((l) => l !== lang)
               .map((l) => (
-                <a href={alternates[l]} hreflang={l} lang={l} class="uppercase opacity-90 hover:underline">
+                <a href={alternates[l]} hreflang={l} lang={l} class="font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-zellige">
                   {l}
                 </a>
               ))
@@ -76,13 +79,13 @@ const nav = [
     <main class="mx-auto w-full max-w-3xl px-4 py-6 flex-1">
       {
         breadcrumbs.length > 1 && (
-          <nav aria-label="breadcrumb" class="mb-4 text-sm text-ink/70">
+          <nav aria-label="breadcrumb" class="bc-label mb-4">
             <ol class="flex flex-wrap gap-1">
               {breadcrumbs.map((c, i) => (
                 <li>
-                  {i > 0 && <span aria-hidden="true">›</span>}
+                  {i > 0 && <span aria-hidden="true" class="px-1">›</span>}
                   {i < breadcrumbs.length - 1 ? (
-                    <a href={c.href} class="underline">{c.name}</a>
+                    <a href={c.href} class="hover:text-zellige hover:underline">{c.name}</a>
                   ) : (
                     <span aria-current="page">{c.name}</span>
                   )}
@@ -95,8 +98,9 @@ const nav = [
       <slot />
     </main>
 
-    <footer class="border-t border-ink/10 text-sm text-ink/70">
-      <div class="mx-auto max-w-3xl px-4 py-4">
+    <footer class="text-sm text-ink-muted">
+      <div class="mx-auto max-w-3xl px-4 pb-6">
+        <div class="bc-khatem-rule mt-0"><span></span></div>
         <p>{t(lang, 'site.tagline')}</p>
         <p>{t(lang, 'footer.legal')}</p>
       </div>

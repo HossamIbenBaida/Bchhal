@@ -24,6 +24,7 @@ export const ui = {
     'common.unverified':
       'Fourchette indicative, pas encore vérifiée sur le terrain. Les relevés dans les souks sont en cours.',
     'common.source': 'Source',
+    'prices.toVerify': 'À vérifier',
     'prices.range': 'Fourchette juste',
     'prices.quality': 'Qualité',
     'prices.city': 'Ville',
@@ -51,6 +52,7 @@ export const ui = {
     'common.unverified':
       'Indicative range, not yet verified on the ground. Souk price surveys are in progress.',
     'common.source': 'Source',
+    'prices.toVerify': 'To verify',
     'prices.range': 'Fair range',
     'prices.quality': 'Quality',
     'prices.city': 'City',

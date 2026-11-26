@@ -111,3 +111,14 @@ Chaque push sur `main` déclenche un déploiement ; chaque branche a son URL de 
 - Audio (après la V1) : enregistrements de vraies voix, servis depuis R2
 - PWA hors ligne (`@vite-pwa/astro`)
 - Contenu : 30 objets, 50 phrases, relevés de prix sur le terrain
+
+## Design system
+
+Les couleurs, polices et composants viennent du design system « Bchhal » (tadelakt, zellige, laiton) : https://claude.ai/artifact/Nrc3j5QRr3Q1vgsB4gZayk
+
+- Tokens et composants : `src/styles/global.css`. Les couleurs suivent le thème clair/sombre du téléphone.
+- Utilitaires Tailwind : `bg-zellige`, `text-ink-muted`, `border-brass`, `bg-saffron-soft`, `rounded-tile`…
+- Composants CSS `bc-*` : `bc-btn`, `bc-stamp`, `bc-card`, `bc-note`, `bc-phrase`, `bc-play`, `bc-city`, `bc-field`, `bc-range`, `bc-khatem-rule`, `bc-zellige`.
+- Polices auto-hébergées via Fontsource (Reem Kufi, Readex Pro, IBM Plex Mono), donc disponibles hors ligne.
+- Règle : un prix sans relevé terrain porte toujours le tampon `bc-stamp--verify`.
+

@@ -24,20 +24,20 @@ const description =
   alternates={{ fr: path('fr', 'darija'), en: path('en', 'darija') }}
   breadcrumbs={[{ name: t(lang, 'nav.home'), href: path(lang) }, { name: t(lang, 'nav.darija'), href: path(lang, 'darija') }]}
 >
-  <h1 class="text-3xl font-bold">{title}</h1>
+  <h1 class="text-3xl font-bold sm:text-4xl">{title}</h1>
   {
     (Object.keys(situations) as (keyof typeof situations)[]).map((s) => {
       const list = items.filter((p) => p.data.situation === s);
       return (
         list.length > 0 && (
           <section class="mt-6">
-            <h2 class="mb-3 text-xl font-bold">{situations[s][lang]}</h2>
+            <h2 class="mb-3 text-2xl font-semibold">{situations[s][lang]}</h2>
             <ul class="grid gap-3 sm:grid-cols-2">
               {list.map((p) => (
                 <li>
-                  <a href={path(lang, 'darija', p.data.slug[lang])} class="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm hover:shadow-md">
-                    <span><span class="font-bold">{p.data.latin}</span> <span class="text-sm text-ink/70">{p.data.meaning[lang]}</span></span>
-                    <span lang="ar" dir="rtl" class="font-arabic text-2xl">{p.data.arabic}</span>
+                  <a href={path(lang, 'darija', p.data.slug[lang])} class="bc-card flex items-center justify-between gap-3 p-4">
+                    <span><span class="font-display text-lg font-semibold">{p.data.latin}</span> <span class="text-sm text-ink-muted">{p.data.meaning[lang]}</span></span>
+                    <span lang="ar" dir="rtl" class="bc-ar text-2xl text-zellige">{p.data.arabic}</span>
                   </a>
                 </li>
               ))}

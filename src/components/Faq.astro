@@ -9,11 +9,11 @@ const { lang, faq } = Astro.props;
 {
   faq.length > 0 && (
     <section class="mt-8">
-      <h2 class="text-xl font-bold mb-3">{t(lang, 'common.faq')}</h2>
+      <h2 class="mb-3 text-2xl font-semibold">{t(lang, 'common.faq')}</h2>
       {faq.map((f) => (
-        <details class="mb-2 rounded-lg bg-white p-3 shadow-sm">
-          <summary class="cursor-pointer font-medium">{f.q[lang]}</summary>
-          <p class="mt-2">{f.a[lang]}</p>
+        <details class="bc-card mb-2 p-4">
+          <summary class="cursor-pointer font-medium marker:text-brass">{f.q[lang]}</summary>
+          <p class="mt-2 text-ink-muted">{f.a[lang]}</p>
         </details>
       ))}
     </section>

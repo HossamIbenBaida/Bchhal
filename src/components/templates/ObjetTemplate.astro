@@ -51,27 +51,27 @@ const title = lang === 'fr' ? `Prix d'un ${d.name.fr.toLowerCase()} au souk de M
   jsonLd={[productLd, faqLd(d.faq, lang)]}
 >
   <article>
-    <h1 class="text-3xl font-bold">{title}</h1>
+    <h1 class="text-3xl font-bold sm:text-4xl">{title}</h1>
     <UpdatedAt {lang} date={d.updated} />
-    <p class="mt-4 text-lg">{d.intro[lang]}</p>
+    <p class="mt-4 text-lg leading-relaxed">{d.intro[lang]}</p>
 
     <section class="mt-6">
-      <h2 class="mb-3 text-xl font-bold">{t(lang, 'prices.range')}</h2>
+      <h2 class="mb-3 text-2xl font-semibold">{t(lang, 'prices.range')}</h2>
       <div class="overflow-x-auto">
-        <table class="w-full rounded-lg bg-white text-left shadow-sm">
-          <thead class="text-sm text-ink/70">
+        <table class="bc-card w-full border-separate border-spacing-0 overflow-hidden text-left">
+          <thead class="bc-label bg-plaster-sunk">
             <tr><th class="p-3">{t(lang, 'prices.quality')}</th><th class="p-3">{t(lang, 'prices.city')}</th><th class="p-3">MAD</th></tr>
           </thead>
           <tbody>
             {
               d.prices.map((p) => (
-                <tr class="border-t border-ink/10">
+                <tr class="[&>td]:border-t [&>td]:border-hairline">
                   <td class="p-3">{p.quality[lang]}</td>
                   <td class="p-3">{p.city}</td>
-                  <td class="p-3 font-semibold">
+                  <td class="p-3 font-semibold bc-num">
                     {fmt.format(p.min)} – {fmt.format(p.max)} <span class="font-normal text-sm">{p.unit[lang]}</span>
-                    {!p.verified && <span class="ml-1 rounded bg-amber-100 px-1 text-xs">?</span>}
-                    {p.source && <span class="block text-xs font-normal text-ink/60">{t(lang, 'common.source')} : {p.source}</span>}
+                    {!p.verified && <span class="bc-stamp bc-stamp--verify mt-2 flex w-fit">{t(lang, 'prices.toVerify')}</span>}
+                    {p.source && <span class="block text-xs font-normal text-ink-muted">{t(lang, 'common.source')} : {p.source}</span>}
                   </td>
                 </tr>
               ))
@@ -79,25 +79,25 @@ const title = lang === 'fr' ? `Prix d'un ${d.name.fr.toLowerCase()} au souk de M
           </tbody>
         </table>
       </div>
-      {d.prices.some((p) => !p.verified) && <p class="mt-2 rounded-lg bg-amber-100 p-3 text-sm">⚠️ {t(lang, 'common.unverified')}</p>}
+      {d.prices.some((p) => !p.verified) && <p class="bc-note mt-3"><span class="bc-stamp bc-stamp--verify shrink-0">!</span><span>{t(lang, 'common.unverified')}</span></p>}
     </section>
 
     {
       d.tips.length > 0 && (
         <section class="mt-6">
-          <h2 class="mb-3 text-xl font-bold">{t(lang, 'prices.tips')}</h2>
-          <ul class="list-disc space-y-1 pl-5">{d.tips.map((tip) => <li>{tip[lang]}</li>)}</ul>
+          <h2 class="mb-3 text-2xl font-semibold">{t(lang, 'prices.tips')}</h2>
+          <ul class="list-disc space-y-1 pl-5 marker:text-brass">{d.tips.map((tip) => <li>{tip[lang]}</li>)}</ul>
         </section>
       )
     }
 
     <section class="mt-6">
-      <h2 class="mb-3 text-xl font-bold">{t(lang, 'common.related')}</h2>
+      <h2 class="mb-3 text-2xl font-semibold">{t(lang, 'common.related')}</h2>
       <ul class="grid gap-2">
         {
           phrases.filter(Boolean).map((p) => (
             <li>
-              <a href={path(lang, 'darija', p.data.slug[lang])} class="text-terracotta underline">
+              <a href={path(lang, 'darija', p.data.slug[lang])} class="text-zellige underline">
                 {t(lang, 'prices.phrase')} : « {p.data.latin} » ({p.data.meaning[lang]})
               </a>
             </li>
@@ -106,7 +106,7 @@ const title = lang === 'fr' ? `Prix d'un ${d.name.fr.toLowerCase()} au souk de M
         {
           d.cities.filter((c) => c in budget.cities).map((c) => (
             <li>
-              <a href={`${path(lang, 'budget')}?city=${c}`} class="text-terracotta underline">
+              <a href={`${path(lang, 'budget')}?city=${c}`} class="text-zellige underline">
                 {t(lang, 'budget.title')} : {budget.cities[c as keyof typeof budget.cities][lang]}
               </a>
             </li>
