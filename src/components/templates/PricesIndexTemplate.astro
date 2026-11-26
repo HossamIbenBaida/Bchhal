@@ -18,14 +18,14 @@ const description =
   alternates={{ fr: path('fr', 'prices'), en: path('en', 'prices') }}
   breadcrumbs={[{ name: t(lang, 'nav.home'), href: path(lang) }, { name: t(lang, 'nav.prices'), href: path(lang, 'prices') }]}
 >
-  <h1 class="text-3xl font-bold">{title}</h1>
+  <h1 class="text-3xl font-bold sm:text-4xl">{title}</h1>
   <ul class="mt-6 grid gap-3 sm:grid-cols-2">
     {
       items.map((o) => (
         <li>
-          <a href={path(lang, 'prices', o.data.slug[lang])} class="block rounded-xl bg-white p-4 shadow-sm hover:shadow-md">
-            <span class="font-bold">{o.data.name[lang]}</span>
-            <span class="block text-sm text-ink/70">{o.data.description[lang]}</span>
+          <a href={path(lang, 'prices', o.data.slug[lang])} class="bc-card block p-4">
+            <span class="font-display text-lg font-semibold">{o.data.name[lang]}</span>
+            <span class="block text-sm text-ink-muted">{o.data.description[lang]}</span>
           </a>
         </li>
       ))

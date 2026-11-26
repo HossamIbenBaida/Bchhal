@@ -26,33 +26,33 @@ const L = {
 }[lang];
 ---
 
-<form id="budget-calc" class="grid gap-4 rounded-xl bg-white p-4 shadow-sm" data-budget={JSON.stringify(budget)} data-lang={lang}>
-  {!budget.verified && <p class="rounded-lg bg-amber-100 p-3 text-sm">⚠️ {L.demo}</p>}
+<form id="budget-calc" class="bc-card grid gap-5 p-4 sm:p-6" data-budget={JSON.stringify(budget)} data-lang={lang}>
+  {!budget.verified && <p class="bc-note"><span class="bc-stamp bc-stamp--verify shrink-0">!</span><span>{L.demo}</span></p>}
 
   <div class="grid gap-4 sm:grid-cols-3">
     <label class="grid gap-1 text-sm font-medium">
       {L.city}
-      <select name="city" class="rounded border border-ink/20 p-2">
+      <select name="city" class="bc-field">
         {Object.entries(budget.cities).map(([id, c]) => <option value={id}>{c[lang]}</option>)}
       </select>
     </label>
     <label class="grid gap-1 text-sm font-medium">
       {L.days}
-      <input type="number" name="days" min="1" max="60" value="7" class="rounded border border-ink/20 p-2" />
+      <input type="number" name="days" min="1" max="60" value="7" class="bc-field" />
     </label>
     <label class="grid gap-1 text-sm font-medium">
       {L.travelers}
-      <input type="number" name="travelers" min="1" max="20" value="2" class="rounded border border-ink/20 p-2" />
+      <input type="number" name="travelers" min="1" max="20" value="2" class="bc-field" />
     </label>
   </div>
 
   <fieldset class="grid gap-2">
-    <legend class="mb-1 text-sm font-medium">{L.style}</legend>
-    <div class="flex flex-wrap gap-3">
+    <legend class="bc-label mb-2">{L.style}</legend>
+    <div class="bc-city">
       {
         Object.entries(budget.styles).map(([id, s], i) => (
-          <label class="flex items-center gap-1">
-            <input type="radio" name="style" value={id} checked={i === 1} /> {s.label[lang]}
+          <label class="relative">
+            <input type="radio" name="style" value={id} checked={i === 1} /><span>{s.label[lang]}</span>
           </label>
         ))
       }
@@ -60,7 +60,7 @@ const L = {
   </fieldset>
 
   <fieldset class="grid gap-2">
-    <legend class="mb-1 text-sm font-medium">{L.extras}</legend>
+    <legend class="bc-label mb-2">{L.extras}</legend>
     <div class="flex flex-wrap gap-3">
       {
         Object.entries(budget.extras).map(([id, e]) => (
@@ -72,12 +72,12 @@ const L = {
     </div>
   </fieldset>
 
-  <output name="result" class="block rounded-lg bg-sand p-4" aria-live="polite">
+  <output name="result" class="block rounded-[var(--radius-md)] border border-zellige bg-zellige-soft p-4" aria-live="polite">
     <p class="text-sm">{L.total}</p>
-    <p class="text-3xl font-bold"><span data-total>—</span> MAD <span class="text-lg font-normal">(≈ <span data-eur>—</span> €)</span></p>
+    <p class="bc-num font-display text-3xl font-bold"><span data-total>—</span> MAD <span class="text-lg font-normal">(≈ <span data-eur>—</span> €)</span></p>
     <p class="text-sm"><span data-pp>—</span> MAD {L.perPerson}</p>
     <ul data-lines class="mt-3 grid gap-1 text-sm"></ul>
-    <p class="mt-2 text-xs text-ink/60">{L.rate} : 1 € ≈ {budget.eurToMad} MAD</p>
+    <p class="mt-2 text-xs text-ink-muted">{L.rate} : 1 € ≈ {budget.eurToMad} MAD</p>
   </output>
 </form>
 

@@ -24,24 +24,24 @@ const src = FEATURES.audio && file && recorded ? `${base.replace(/\/?$/, '/')}${
     src ? (
       <>
         <audio preload="none" src={src} />
-        <button type="button" data-play class="rounded-full bg-mint px-5 py-2 font-semibold text-white">
-          ▶ {t(lang, 'darija.listen')}
+        <button type="button" data-play class="bc-play" aria-label={t(lang, 'darija.listen')}>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" /></svg>
         </button>
       </>
     ) : (
-      FEATURES.audio && <p class="text-sm italic text-ink/60">{t(lang, 'darija.audioSoon')}</p>
+      FEATURES.audio && <p class="text-sm italic text-ink-muted">{t(lang, 'darija.audioSoon')}</p>
     )
   }
-  <button type="button" data-show class="rounded-full border-2 border-terracotta px-5 py-2 font-semibold text-terracotta">
+  <button type="button" data-show class="bc-btn bc-btn--night">
     {t(lang, 'darija.show')}
   </button>
 
-  <dialog data-screen class="m-0 h-full max-h-none w-full max-w-none bg-sand p-6 backdrop:bg-ink/80">
+  <dialog data-screen class="bc-show m-0 h-full max-h-none w-full max-w-none p-6 backdrop:bg-night">
     <div class="flex h-full flex-col items-center justify-center gap-6 text-center">
-      <p lang="ar" dir="rtl" class="font-arabic text-7xl leading-tight">{arabic}</p>
-      <p class="text-4xl font-bold">{latin}</p>
+      <p lang="ar" dir="rtl" class="bc-show__ar">{arabic}</p>
+      <p class="bc-show__lat">{latin}</p>
       <form method="dialog">
-        <button class="rounded-full bg-ink px-6 py-3 text-sand">{t(lang, 'darija.close')}</button>
+        <button class="bc-btn bc-btn--ghost" style="color: var(--on-night)">{t(lang, 'darija.close')}</button>
       </form>
     </div>
   </dialog>

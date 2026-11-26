@@ -36,33 +36,33 @@ const title =
   jsonLd={[faqLd(d.faq, lang)]}
 >
   <article>
-    <h1 class="text-3xl font-bold">{title}</h1>
+    <h1 class="text-3xl font-bold sm:text-4xl">{title}</h1>
     <UpdatedAt {lang} date={d.updated} />
 
-    <div class="mt-6 rounded-xl bg-white p-6 text-center shadow-sm">
-      <p lang="ar" dir="rtl" class="font-arabic text-5xl">{d.arabic}</p>
-      <p class="mt-2 text-3xl font-bold">{d.latin}</p>
-      <p class="mt-1 text-lg text-ink/70">{t(lang, 'darija.meaning')} : {d.meaning[lang]}</p>
-      <div class="mt-4 flex justify-center">
+    <div class="bc-phrase mx-auto mt-8 max-w-sm">
+      <p lang="ar" dir="rtl" class="bc-phrase__ar">{d.arabic}</p>
+      <p class="bc-phrase__lat">{d.latin}</p>
+      <p class="bc-phrase__mean">{t(lang, 'darija.meaning')} : {d.meaning[lang]}</p>
+      <div class="bc-phrase__actions">
         <AudioPlayer {lang} latin={d.latin} arabic={d.arabic} file={d.audio} recorded={d.audioRecorded} />
       </div>
     </div>
 
     <section class="mt-6">
-      <h2 class="mb-2 text-xl font-bold">{t(lang, 'darija.when')}</h2>
+      <h2 class="mb-2 text-2xl font-semibold">{t(lang, 'darija.when')}</h2>
       <p>{d.usage[lang]}</p>
     </section>
 
     {
       (objets.length > 0 || related.length > 0) && (
         <section class="mt-6">
-          <h2 class="mb-3 text-xl font-bold">{t(lang, 'common.related')}</h2>
+          <h2 class="mb-3 text-2xl font-semibold">{t(lang, 'common.related')}</h2>
           <ul class="grid gap-2">
             {objets.filter(Boolean).map((o) => (
-              <li><a href={path(lang, 'prices', o.data.slug[lang])} class="text-terracotta underline">{t(lang, 'nav.prices')} : {o.data.name[lang]}</a></li>
+              <li><a href={path(lang, 'prices', o.data.slug[lang])} class="text-zellige underline">{t(lang, 'nav.prices')} : {o.data.name[lang]}</a></li>
             ))}
             {related.filter(Boolean).map((p) => (
-              <li><a href={path(lang, 'darija', p.data.slug[lang])} class="text-terracotta underline">« {p.data.latin} »</a></li>
+              <li><a href={path(lang, 'darija', p.data.slug[lang])} class="text-zellige underline">« {p.data.latin} »</a></li>
             ))}
           </ul>
         </section>
