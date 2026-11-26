@@ -1,7 +1,7 @@
 # Bchhal ?
 
 Compagnon de voyage au Maroc (FR/EN) : **juste prix au souk**, **budget voyage** et **darija de poche**.
-Site statique Astro + Tailwind, hébergé sur Cloudflare Pages.
+Site statique Astro + Tailwind, hébergé sur Cloudflare Workers (assets statiques).
 
 ## Lancer le projet
 
@@ -19,7 +19,7 @@ npm run dev            # http://localhost:4321 (redirects to /fr/)
 | `npm run build`   | Génère le site statique dans `dist/` (+ sitemap)       |
 | `npm run preview` | Sert `dist/` en local pour vérifier le build           |
 | `npm run check`   | Vérification TypeScript et Astro                       |
-| `npm run deploy`  | Build + mise en ligne manuelle avec Wrangler           |
+| `npm run deploy`  | Build + mise en ligne manuelle (`wrangler deploy`)     |
 
 ## Structure
 
@@ -44,7 +44,7 @@ src/
     en/{prices,darija,budget}/
     robots.txt.ts
 public/
-  _redirects  _headers  # Cloudflare Pages rules
+  _redirects  _headers  # Cloudflare rules (applied by Workers static assets)
 ```
 
 ### URLs
@@ -93,17 +93,22 @@ phrase et déposer le fichier (`bchhal.mp3`) dans R2 (en local : `public/audio/`
 | `SITE_URL`          | URL publique (canonical, hreflang, sitemap). Défaut : `https://bchhal.pages.dev` |
 | `PUBLIC_AUDIO_BASE` | URL du bucket R2 public pour l'audio. Vide = `/audio/`       |
 
-## Mise en ligne sur Cloudflare Pages
+## Mise en ligne sur Cloudflare (Workers + static assets)
 
-Dans le tableau de bord Cloudflare : **Workers & Pages > Create > Pages > Connect to Git**, choisir ce repo, puis :
+Le site est servi comme **assets statiques d'un Worker** (`wrangler.toml` > `[assets] directory = "./dist"`).
+Dans le tableau de bord Cloudflare : **Workers & Pages > Create > Import a repository**, choisir ce repo, puis :
 
-- Framework preset : **Astro**
 - Build command : `npm run build`
-- Build output directory : `dist`
-- Variable d'environnement : `SITE_URL` = le domaine final (et `NODE_VERSION` = `22` si besoin)
+- Deploy command : `npx wrangler deploy`
+- Variable de build : `SITE_URL` = le domaine final (sinon `https://bchhal.pages.dev` est utilisé dans les liens canoniques)
 
-Chaque push sur `main` déclenche un déploiement ; chaque branche a son URL de prévisualisation.
-`wrangler.toml` prépare déjà les liaisons D1, KV et R2 (commentées) pour les prochaines étapes.
+Chaque push sur `main` reconstruit et redéploie le site. `public/_headers` et `public/_redirects` sont appliqués
+par Workers (en-têtes de sécurité, cache, redirection de `/` vers `/fr/`). Une URL inconnue affiche `404.html`.
+
+Déploiement manuel depuis ton poste : `npx wrangler login` puis `npm run deploy`.
+Tester la version Workers en local : `npm run build && npx wrangler dev`.
+
+`wrangler.toml` prépare aussi les liaisons D1, KV et R2 (commentées) pour l'API des prix.
 
 ## Prochaines étapes
 

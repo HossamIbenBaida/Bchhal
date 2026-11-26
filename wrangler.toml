@@ -1,11 +1,19 @@
-# Cloudflare Pages configuration.
-# The Git integration (Pages connected to GitHub) builds with:
-#   Build command: npm run build   |   Output directory: dist
+# Cloudflare Workers (static assets) configuration.
+# Workers Builds (connected to GitHub) runs on every push to main:
+#   Build command:  npm run build
+#   Deploy command: npx wrangler deploy
 name = "bchhal"
 compatibility_date = "2026-11-01"
-pages_build_output_dir = "./dist"
 
-# Bindings planned for the next steps (uncomment once created with wrangler):
+# The whole site is pre-rendered by Astro into ./dist and served as static assets.
+# public/_headers and public/_redirects are copied into dist and applied by Workers.
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+
+# Bindings planned for the next steps (uncomment once created with wrangler).
+# Using them will need a Worker entry point (`main = "..."`) for the price API.
 # [[d1_databases]]
 # binding = "DB"
 # database_name = "bchhal-db"
