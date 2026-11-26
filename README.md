@@ -34,7 +34,8 @@ src/
   i18n/ui.ts             # UI strings, localised URL segments, path() helper
   layouts/BaseLayout.astro   # <head>: title, description, canonical, hreflang, JSON-LD
   components/
-    AudioPlayer.astro    # audio + "show the screen" full-screen mode
+    AudioPlayer.astro    # "show the screen" mode (+ audio, off in V1)
+  config.ts              # feature flags (audio off in V1)
     BudgetCalculator.astro   # vanilla JS calculator, reads ?city=
     Faq.astro, UpdatedAt.astro
     templates/           # one template per page type, shared by FR and EN
@@ -71,10 +72,11 @@ Chaque fourchette a un champ `verified`. Tant qu'il vaut `false`, la page affich
 Passer à `true` seulement avec un relevé réel, en renseignant `source` et `surveyedAt`.
 Les montants actuels de `tapis.json` et de `data/budget.json` sont des **valeurs de démonstration**.
 
-### Audio
+### Audio (hors V1)
 
-Mettre `audioRecorded: true` et déposer le fichier (`bchhal.mp3`) dans R2. En local, le placer dans `public/audio/`.
-Tant que `audioRecorded` vaut `false`, la page affiche « enregistrement à venir ».
+L'audio est désactivé pour la V1 : `FEATURES.audio = false` dans `src/config.ts`. Les pages phrase gardent le mode
+« montrer l'écran ». Pour le réactiver plus tard : passer le drapeau à `true`, mettre `audioRecorded: true` dans la
+phrase et déposer le fichier (`bchhal.mp3`) dans R2 (en local : `public/audio/`).
 
 ## SEO intégré
 
@@ -82,7 +84,7 @@ Tant que `audioRecorded` vaut `false`, la page affiche « enregistrement à veni
 - `sitemap-index.xml` (via `@astrojs/sitemap`) et `robots.txt` générés au build
 - JSON-LD : `BreadcrumbList`, `FAQPage`, `Product` + `AggregateOffer` (prix vérifiés uniquement), `WebSite`
 - Date « mis à jour le » visible, liens internes objet ↔ phrase ↔ budget de la ville
-- Aucun JavaScript sauf le calculateur et le lecteur audio ; pas de police externe
+- Aucun JavaScript sauf le calculateur et le mode « montrer l'écran » ; pas de police externe
 
 ## Variables d'environnement
 
@@ -106,6 +108,6 @@ Chaque push sur `main` déclenche un déploiement ; chaque branche a son URL de 
 ## Prochaines étapes
 
 - API des prix déclarés : Pages Functions + D1, médianes en cache dans KV
-- Lecteur audio branché sur R2
+- Audio (après la V1) : enregistrements de vraies voix, servis depuis R2
 - PWA hors ligne (`@vite-pwa/astro`)
 - Contenu : 30 objets, 50 phrases, relevés de prix sur le terrain
